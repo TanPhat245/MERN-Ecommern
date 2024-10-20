@@ -54,7 +54,7 @@ const Contact = () => {
           </span>
           <ul className="list-disc">
             <div className="ml-[20px]">
-              <li>HCM - Q.Phú Nhuận: 43 Huỳnh Văn Bánh</li>
+              <li>HCM - Q.8: 180 Cao Lỗ</li>
               <li>HCM - Q.Tân Phú: 1041 Lũy Bán Bích</li>
               <li>HCM - Q.1: 26 Lý Tự Trọng (TNP)</li>
               <li>ĐÀ LẠT - 11 Khu Hoà Bình, P.1</li>
