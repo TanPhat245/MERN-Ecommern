@@ -6,6 +6,7 @@ import Newsletter from "../components/Newsletter";
 const About = () => {
   return (
     <div>
+    
       <div className="text-2x; text-center pt-8 border-t">
         <Title text1={"VỀ"} text2={"CHÚNG TÔI"} />
       </div>
