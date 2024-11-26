@@ -27,4 +27,17 @@ a.active hr{
         color: white;
     }
   }
+  @keyframes rotateY {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(180deg);
+    }
+  }
+  
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+    animation: rotateY 0.8s ease-in-out forwards;
+  }
   
