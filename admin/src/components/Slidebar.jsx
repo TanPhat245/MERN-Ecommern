@@ -6,6 +6,7 @@ const Slidebar = () => {
   // State để quản lý mở/đóng menu con
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isProductOpen, setIsProductOpen] = useState(false);
+  const [isManagement, setIsManagement] = useState(false);
 
   return (
     <div className="w-[20%] min-h-screen bg-gray-100 border-r border-gray-300">
@@ -18,8 +19,8 @@ const Slidebar = () => {
           className="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-gray-200 transition-all"
           to="/"
         >
-          <img className="w-5 h-5" src={assets.dashboard_icon} alt="" />
-          <span className="text-sm font-medium">Dashboard</span>
+          <img className="w-5 h-5" src={assets.order_icon} alt="" />
+          <span className="text-sm font-medium">Trang chủ</span>
         </NavLink>
 
         {/* Category */}
@@ -29,8 +30,8 @@ const Slidebar = () => {
             onClick={() => setIsCategoryOpen(!isCategoryOpen)}
           >
             <div className="flex items-center gap-3">
-              <img className="w-5 h-5" src={assets.category_icon} alt="" />
-              <span className="text-sm font-medium">Category</span>
+              <img className="w-5 h-5" src={assets.order_icon} alt="" />
+              <span className="text-sm font-medium">Danh mục</span>
             </div>
             <span>{isCategoryOpen ? '▲' : '▼'}</span>
           </div>
@@ -40,7 +41,7 @@ const Slidebar = () => {
                 className="block py-2 px-4 rounded-lg hover:bg-gray-200 transition-all"
                 to="/category/add"
               >
-                Thêm
+                Thêm danh mục
               </NavLink>
               <NavLink
                 className="block py-2 px-4 rounded-lg hover:bg-gray-200 transition-all"
@@ -59,8 +60,8 @@ const Slidebar = () => {
             onClick={() => setIsProductOpen(!isProductOpen)}
           >
             <div className="flex items-center gap-3">
-              <img className="w-5 h-5" src={assets.product_icon} alt="" />
-              <span className="text-sm font-medium">Products</span>
+              <img className="w-5 h-5" src={assets.order_icon} alt="" />
+              <span className="text-sm font-medium">Sản phẩm</span>
             </div>
             <span>{isProductOpen ? '▲' : '▼'}</span>
           </div>
@@ -70,7 +71,7 @@ const Slidebar = () => {
                 className="block py-2 px-4 rounded-lg hover:bg-gray-200 transition-all"
                 to="/add"
               >
-                Thêm
+                Thêm sản phẩm
               </NavLink>
               <NavLink
                 className="block py-2 px-4 rounded-lg hover:bg-gray-200 transition-all"
@@ -88,7 +89,7 @@ const Slidebar = () => {
           to="/orders"
         >
           <img className="w-5 h-5" src={assets.order_icon} alt="" />
-          <span className="text-sm font-medium">Orders</span>
+          <span className="text-sm font-medium">Đơn đặt hàng</span>
         </NavLink>
 
         {/* Comments */}
@@ -96,9 +97,38 @@ const Slidebar = () => {
           className="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-gray-200 transition-all"
           to="/comments"
         >
-          <img className="w-5 h-5" src={assets.comment_icon} alt="" />
-          <span className="text-sm font-medium">Comments</span>
+          <img className="w-5 h-5" src={assets.order_icon} alt="" />
+          <span className="text-sm font-medium">Bình luận</span>
         </NavLink>
+
+        <div>
+          <div
+            className="flex items-center justify-between gap-3 py-3 px-4 rounded-lg hover:bg-gray-200 transition-all cursor-pointer"
+            onClick={() => setIsManagement(!isManagement)}
+          >
+            <div className="flex items-center gap-3">
+              <img className="w-5 h-5" src={assets.order_icon} alt="" />
+              <span className="text-sm font-medium">Nhân viên</span>
+            </div>
+            <span>{isManagement ? '▲' : '▼'}</span>
+          </div>
+          {isManagement && (
+            <div className="ml-8 mt-1">
+              <NavLink
+                className="block py-2 px-4 rounded-lg hover:bg-gray-200 transition-all"
+                to="/add"
+              >
+                Thêm nhân viên
+              </NavLink>
+              <NavLink
+                className="block py-2 px-4 rounded-lg hover:bg-gray-200 transition-all"
+                to="/list"
+              >
+                Danh sách
+              </NavLink>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
