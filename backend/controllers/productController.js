@@ -28,6 +28,7 @@ const addProduct = async (req,res) => {
             sizes: JSON.parse(sizes),
             image: imageUrl,
             date: Date.now()
+            //tình trạng
         }
 
         console.log(productData);

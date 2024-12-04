@@ -4,7 +4,6 @@ import { FaStar } from 'react-icons/fa';
 
 const ProductItem = ({ id, image, name, price, rating = 4, description = 'Còn hàng', bestseller = true }) => {
   const [isHovered, setIsHovered] = useState(false);
-
   const hasMultipleImages = image && image.length > 1;
   const inStock = !description?.toLowerCase().includes('hết hàng');
 
@@ -24,9 +23,8 @@ const ProductItem = ({ id, image, name, price, rating = 4, description = 'Còn h
       {/* Hình ảnh sản phẩm */}
       <div className="overflow-hidden rounded-lg">
         <img
-          className={`transition-transform duration-500 ease-in-out ${
-            hasMultipleImages && isHovered ? 'rotate-y-180' : ''
-          }`}
+          className={`transition-transform duration-500 ease-in-out ${hasMultipleImages && isHovered ? 'rotate-y-180' : ''
+            }`}
           src={hasMultipleImages && isHovered ? image[1] : image[0]}
           alt={name}
         />
@@ -42,11 +40,10 @@ const ProductItem = ({ id, image, name, price, rating = 4, description = 'Còn h
             ))}
           </div>
         </div>
-        <p className="text-sm font-semibold text-gray-600">{price}đ</p>
+        <p className="text-sm font-semibold text-gray-600"><p>{price}.000đ</p></p>
         <p
-          className={`text-xs font-medium mt-1 ${
-            inStock ? 'text-green-500' : 'text-red-500'
-          }`}
+          className={`text-xs font-medium mt-1 ${inStock ? 'text-green-500' : 'text-red-500'
+            }`}
         >
           {inStock ? 'Còn hàng' : 'Hết hàng'}
         </p>

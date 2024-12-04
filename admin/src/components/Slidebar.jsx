@@ -86,7 +86,7 @@ const Slidebar = () => {
         {/* Orders */}
         <NavLink
           className="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-gray-200 transition-all"
-          to="/orders"
+          to="/order"
         >
           <img className="w-5 h-5" src={assets.order_icon} alt="" />
           <span className="text-sm font-medium">Đơn đặt hàng</span>

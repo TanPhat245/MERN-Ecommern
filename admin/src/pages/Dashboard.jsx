@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Bar, Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -11,6 +11,7 @@ import {
   LineElement,
   PointElement,
 } from "chart.js";
+import axios from "axios";
 
 ChartJS.register(
   CategoryScale,
@@ -24,6 +25,32 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [totalReviews, setTotalReviews] = useState(0);
+
+  // Fetch data for total statistics
+  const fetchStatistics = async () => {
+    try {
+      const response = await axios.get("/api/dashboard/stats"); // Replace with actual API endpoint
+      if (response.data.success) {
+        setTotalUsers(response.data.stats.totalUsers);
+        setTotalOrders(response.data.stats.totalOrders);
+        setTotalProducts(response.data.stats.totalProducts);
+        setTotalReviews(response.data.stats.totalReviews);
+      } else {
+        console.error("Failed to fetch statistics");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStatistics();
+  }, []);
+
   // Data for Bar Chart
   const barData = {
     labels: ["January", "February", "March", "April", "May", "June"],
@@ -73,46 +100,28 @@ const Dashboard = () => {
         {/* Total Users */}
         <div className="bg-green-100 p-4 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold text-green-700">Total Users</h3>
-          <p className="text-3xl font-bold text-green-800 mt-2">2292</p>
+          <p className="text-3xl font-bold text-green-800 mt-2">{totalUsers}</p>
         </div>
         {/* Total Orders */}
         <div className="bg-purple-100 p-4 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold text-purple-700">Total Orders</h3>
-          <p className="text-3xl font-bold text-purple-800 mt-2">80</p>
+          <p className="text-3xl font-bold text-purple-800 mt-2">{totalOrders}</p>
         </div>
         {/* Total Products */}
         <div className="bg-blue-100 p-4 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold text-blue-700">
             Total Products
           </h3>
-          <p className="text-3xl font-bold text-blue-800 mt-2">86</p>
+          <p className="text-3xl font-bold text-blue-800 mt-2">{totalProducts}</p>
         </div>
         {/* Total Reviews */}
         <div className="bg-yellow-100 p-4 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold text-yellow-700">
             Total Reviews
           </h3>
-          <p className="text-3xl font-bold text-yellow-800 mt-2">86</p>
+          <p className="text-3xl font-bold text-yellow-800 mt-2">{totalReviews}</p>
         </div>
       </div>
-
-      <table className="w-full border-collapse border border-gray-300 mb-6">
-          <thead>
-            <tr className="bg-blue-500 text-white">
-              <th className="px-4 py-2">Product</th>
-              <th className="px-4 py-2">Category</th>
-              <th className="px-4 py-2">Sub Category</th>
-              <th className="px-4 py-2">Brand</th>
-              <th className="px-4 py-2">Price</th>
-              <th className="px-4 py-2">Rating</th>
-              <th className="px-4 py-2">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-        
-          </tbody>
-        </table>
 
       {/* Statistics Section */}
       <div className="grid grid-cols-2 gap-6">
