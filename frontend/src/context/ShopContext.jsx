@@ -109,6 +109,7 @@ const ShopContextProvider = (props) => {
       toast.error(error.message);
     }
   };
+  
 
   // Lấy dữ liệu sản phẩm khi ứng dụng khởi chạy
   useEffect(() => {

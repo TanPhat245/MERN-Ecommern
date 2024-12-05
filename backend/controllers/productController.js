@@ -27,8 +27,8 @@ const addProduct = async (req,res) => {
             bestseller: bestseller === "true" ? true : false,
             sizes: JSON.parse(sizes),
             image: imageUrl,
-            date: Date.now()
-            //tình trạng
+            date: Date.now(),
+            status
         }
 
         console.log(productData);
@@ -74,5 +74,17 @@ const singleProduct = async (req,res) => {
         res.json({success:false,message:error.message})
     }
 }
+// tình tạng
+const updateProductStatus = async (req, res) => {
+    try {
+        const { id, status } = req.body;
+        await productModel.findByIdAndUpdate(id, { status });
+        res.json({ success: true, message: "Cập nhật trạng thái thành công" });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
 
-export {listProduct,addProduct,removeProduct,singleProduct};
+
+export {listProduct,addProduct,removeProduct,singleProduct, updateProductStatus};

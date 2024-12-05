@@ -15,6 +15,7 @@ import SearchBar from './components/SearchBar'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ScrollToTop from './components/Scroll'
+import Chatbox from './components/Chatbox'
 
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
         <Route path='/place-order' element={<PlaceOrder/>} />
         <Route path='/orders' element={<Orders/>}/>
       </Routes>
+      <Chatbox/>
       <Footer/>
     </div>
   )

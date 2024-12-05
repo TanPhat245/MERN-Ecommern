@@ -74,8 +74,8 @@ const Product = () => {
                   key={index}
                   onClick={() => setSize(item)}
                   className={`py-2 px-6 rounded-lg border ${item === size
-                      ? "bg-green-500 text-white border-green-500"
-                      : "bg-gray-100 text-gray-700 border-gray-300"
+                    ? "bg-green-500 text-white border-green-500"
+                    : "bg-gray-100 text-gray-700 border-gray-300"
                     } transition-all duration-200`}
                 >
                   {item}
@@ -86,11 +86,27 @@ const Product = () => {
 
           {/* Nút thêm vào giỏ hàng */}
           <button
-            onClick={() => addToCart(productData._id, size)}
-            className="w-full py-3 bg-green-700 text-white text-lg rounded-lg hover:bg-green-800 active:bg-green-600 transition-all"
+            onClick={() => {
+              if (productData.status.toLowerCase() === "hết hàng") {
+                alert("Sản phẩm này đã hết hàng!");
+              } else if (!size) {
+                alert("Vui lòng chọn size trước khi thêm vào giỏ hàng.");
+              } else {
+                addToCart(productData._id, size);
+                alert("Sản phẩm đã được thêm vào giỏ hàng.");
+              }
+            }}
+            className={`w-full py-3 ${productData.status.toLowerCase() === "hết hàng"
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-green-700 hover:bg-green-800 active:bg-green-600"
+              } text-white text-lg rounded-lg transition-all`}
+            disabled={productData.status.toLowerCase() === "hết hàng"}
           >
-            THÊM VÀO GIỎ HÀNG
+            {productData.status.toLowerCase() === "hết hàng"
+              ? "HẾT HÀNG"
+              : "THÊM VÀO GIỎ HÀNG"}
           </button>
+
 
           <hr className="my-8" />
           <div className="mt-8 flex flex-col gap-4">

@@ -9,8 +9,8 @@ const productSchema = new mongoose.Schema({
     subCategory: { type:String, required:true },
     sizes: { type:Array, required:true },
     bestseller: {type:Boolean},
-    date: { type:Number, required:true }
-    //tình trạng
+    date: { type:Number, required:true },
+    status: {type:String, required:true, default:'Còn hàng'}
 })
 
 const productModel = mongoose.models.product || mongoose.model("product",productSchema);

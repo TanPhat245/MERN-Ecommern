@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 
-const ProductItem = ({ id, image, name, price, rating = 4, description = 'Còn hàng', bestseller = true }) => {
+const ProductItem = ({ id, image, name, price, rating = 4, status, bestseller = true }) => {
   const [isHovered, setIsHovered] = useState(false);
   const hasMultipleImages = image && image.length > 1;
-  const inStock = !description?.toLowerCase().includes('hết hàng');
+  const inStock = !status?.toLowerCase().includes('hết hàng');
 
   return (
     <Link

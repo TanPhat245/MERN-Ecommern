@@ -24,7 +24,18 @@ const App = () => {
 
   return (
     <div className='bg-gray-100 min-h-screen'>
-    <ToastContainer/>
+    <ToastContainer
+    position="bottom-right"
+    autoClose={1000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="light"
+    transition: Bounce/>
     { token === "" ? <Login setToken={setToken} /> 
     : <>
       <Navbar setToken={setToken}/>
