@@ -23,7 +23,7 @@ const ProductItem = ({ id, image, name, price, rating = 4, status, bestseller = 
       {/* Hình ảnh sản phẩm */}
       <div className="overflow-hidden rounded-lg">
         <img
-          className={`transition-transform duration-500 ease-in-out ${hasMultipleImages && isHovered ? 'rotate-y-180' : ''
+          className={`transition-transform duration-500 ease-in-out ${hasMultipleImages && isHovered ? '' : ''
             }`}
           src={hasMultipleImages && isHovered ? image[1] : image[0]}
           alt={name}

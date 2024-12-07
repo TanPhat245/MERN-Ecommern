@@ -77,4 +77,23 @@ const adminLogin = async (req, res) => {
     }
 }
 
-export { loginUser, registerUser,adminLogin }
+const getUserProfile = async (req, res) => {
+    try {
+      // Sử dụng req.userId thay vì req.user.id
+      const user = await userModel.findById(req.userId).select("-password"); // Không lấy mật khẩu
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: "Không tìm thấy người dùng",
+        });
+      }
+      res.json({ success: true, user });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        success: false,
+        message: "Lỗi máy chủ",
+      });
+    }
+  };
+export { loginUser, registerUser,adminLogin, getUserProfile }

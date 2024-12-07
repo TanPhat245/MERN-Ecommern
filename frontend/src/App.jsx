@@ -16,6 +16,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ScrollToTop from './components/Scroll'
 import Chatbox from './components/Chatbox'
+import UserProfile from './pages/UserProfile'
 
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
         <Route path='/login' element={<Login/>} />
         <Route path='/place-order' element={<PlaceOrder/>} />
         <Route path='/orders' element={<Orders/>}/>
+        <Route path='/profile' element={<UserProfile/>} />
       </Routes>
       <Chatbox/>
       <Footer/>
