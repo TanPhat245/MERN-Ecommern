@@ -6,6 +6,12 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     cartData: { type: Object, default: {} },
+    street: { type: String, required: true },
+    city: { type: String, required: true },
+    state: { type: String, required: true },
+    district: { type: String, required: true },
+    country: { type: String, required: true },
+    phone: { type: String, required: false },
   },
   { minimize: false }
 );

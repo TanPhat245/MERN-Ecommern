@@ -20,20 +20,20 @@ const UserProfile = () => {
     try {
       const response = await axios.get(backenUrl + '/api/user/profile', {
         headers: {
-          Authorization: `Bearer ${token}` // Đảm bảo token được gửi đúng format
+          Authorization: `Bearer ${token}`
         }
       });
 
       if (response.data.success) {
-        setUser(response.data.user); // Lưu thông tin người dùng vào state
+        setUser(response.data.user); 
       } else {
-        toast.error(response.data.message); // Thông báo lỗi nếu không lấy được thông tin
-        navigate("/login"); // Chuyển hướng nếu không lấy được thông tin
+        toast.error(response.data.message); 
+        navigate("/login"); 
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
         toast.error("Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại!");
-        navigate("/login"); // Chuyển hướng nếu token hết hạn
+        navigate("/login"); 
       } else {
         toast.error("Không thể tải thông tin người dùng");
       }

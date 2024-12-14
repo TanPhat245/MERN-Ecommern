@@ -94,10 +94,10 @@ const Collection = () => {
               <input className='w-3' type="checkbox"  value={'quan'} onChange={toggleCategory}/> Nam
             </p>
             <p className='flex gap-2'>
-              <input className='w-3' type="checkbox"  value={'Nữ'} onChange={toggleCategory}/> Nữ
+              <input className='w-3' type="checkbox"  value={'ao'} onChange={toggleCategory}/> Nữ
             </p>
             <p className='flex gap-2'>
-              <input className='w-3' type="checkbox"  value={'Phụ kiện'} onChange={toggleCategory}/> Phụ kiện
+              <input className='w-3' type="checkbox"  value={'bag'} onChange={toggleCategory}/> Phụ kiện
             </p>
           </div>
         </div>
@@ -107,13 +107,13 @@ const Collection = () => {
           <p className='mb-3 text-s font-medium'>Loại</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
             <p className='flex gap-2'>
-              <input className='w-3' type="checkbox"  value={'Áo'} onChange={toggleSubCategory}/> Áo
+              <input className='w-3' type="checkbox"  value={'ao'} onChange={toggleSubCategory}/> Áo
             </p>
             <p className='flex gap-2'>
-              <input className='w-3' type="checkbox"  value={'Quần'} onChange={toggleSubCategory}/> Quần
+              <input className='w-3' type="checkbox"  value={'quan'} onChange={toggleSubCategory}/> Quần
             </p>
             <p className='flex gap-2'>
-              <input className='w-3' type="checkbox"  value={'Giày'} onChange={toggleSubCategory}/>  Giày
+              <input className='w-3' type="checkbox"  value={'giay'} onChange={toggleSubCategory}/>  Giày
             </p>
           </div>
         </div>
@@ -136,7 +136,7 @@ const Collection = () => {
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
             {
               filterProducts.map((item,index)=>(
-                <ProductItem key={index} name={item.name} id={item._id} price={item.price} image={item.image} />
+                <ProductItem key={index} name={item.name} id={item._id} price={item.price} image={item.image} bestseller={item.bestseller} status={item.status}/>
               ))
             }
         </div>

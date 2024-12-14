@@ -1,21 +1,22 @@
-import React, { useContext, useState } from 'react'
-import { assets } from '../assets/assets'
-import { Link, NavLink } from 'react-router-dom'
-import { ShopContext } from '../context/ShopContext'
-import { toast } from 'react-toastify'
+import React, { useContext, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { ShopContext } from "../context/ShopContext";
+import { toast } from "react-toastify";
+import { assets } from "../assets/assets";
 
 const Navbar = () => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
 
-  const { setShowSearch, getCartCount, navigate, token, setToken, setCartItems } = useContext(ShopContext)
+  const { setShowSearch, getCartCount, navigate, token, setToken, setCartItems } =
+    useContext(ShopContext);
 
   const logout = () => {
-    toast.success("Đăng xuất thành công")
-    navigate('/login')
-    localStorage.removeItem('token')
-    setToken('')
-    setCartItems({})
-  }
+    toast.success("Đăng xuất thành công");
+    navigate("/login");
+    localStorage.removeItem("token");
+    setToken("");
+    setCartItems({});
+  };
 
   return (
     <div className="bg-white shadow-md sticky top-0 z-50">
@@ -72,7 +73,7 @@ const Navbar = () => {
 
           <div className="group relative">
             <img
-              onClick={() => (token ? null : navigate('/login'))}
+              onClick={() => (token ? null : navigate("/login"))}
               className="w-5 cursor-pointer"
               src={assets.profile_icon}
               alt="Profile"
@@ -80,9 +81,11 @@ const Navbar = () => {
             {token && (
               <div className="group-hover:block hidden absolute right-0 pt-4 bg-slate-100 rounded text-gray-500">
                 <div className="flex flex-col gap-2 w-36 py-3 px-5">
-                  <NavLink to="/profile" ><p className="cursor-pointer hover:text-black">Tôi</p></NavLink>
+                    <p
+                     onClick={() => navigate("/profile")}
+                    className="cursor-pointer hover:text-black">Tôi</p>
                   <p
-                    onClick={() => navigate('/orders')}
+                    onClick={() => navigate("/orders")}
                     className="cursor-pointer hover:text-black"
                   >
                     Đơn hàng
@@ -103,7 +106,7 @@ const Navbar = () => {
           </Link>
 
           <img
-            onClick={() => setVisible(true)}
+            onClick={() => setVisible(!visible)}
             src={assets.menu_icon}
             className="w-5 cursor-pointer sm:hidden"
             alt="Menu"
@@ -111,42 +114,44 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
       <div
-        className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full' : 'w-0'}`}
+        className={`fixed top-0 left-0 right-0 bg-white h-screen z-40 transform transition-transform ${
+          visible ? "translate-x-0" : "translate-x-full"
+        }`}
       >
         <div className="flex flex-col text-gray-600">
           <div
             onClick={() => setVisible(false)}
             className="flex items-center gap-4 p-3 cursor-pointer"
           >
-            <img className="h-4 rotate-180" src={assets.dropdown_icon} alt="Close Menu" />
+            <img className="h-4 rotate-180" src={assets.cross_icon} alt="Close Menu" />
             <p>Đóng</p>
           </div>
+
           <NavLink
             onClick={() => setVisible(false)}
-            className="py-2 pl-6 border-t hover:bg-gray-100"
+            className="py-4 pl-6 border-t hover:bg-gray-100 text-lg"
             to="/"
           >
             TRANG CHỦ
           </NavLink>
           <NavLink
             onClick={() => setVisible(false)}
-            className="py-2 pl-6 border-t hover:bg-gray-100"
+            className="py-4 pl-6 border-t hover:bg-gray-100 text-lg"
             to="/collection"
           >
             BỘ SƯU TẬP
           </NavLink>
           <NavLink
             onClick={() => setVisible(false)}
-            className="py-2 pl-6 border-t hover:bg-gray-100"
+            className="py-4 pl-6 border-t hover:bg-gray-100 text-lg"
             to="/about"
           >
             GIỚI THIỆU
           </NavLink>
           <NavLink
             onClick={() => setVisible(false)}
-            className="py-2 pl-6 border-t hover:bg-gray-100"
+            className="py-4 pl-6 border-t hover:bg-gray-100 text-lg"
             to="/contact"
           >
             LIÊN HỆ
@@ -154,7 +159,7 @@ const Navbar = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

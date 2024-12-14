@@ -7,6 +7,8 @@ import { assets } from '../assets/assets';
 const Order = ({ token }) => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ordersPerPage = 5; // Mỗi trang hiển thị 5 đơn hàng
 
   // Lấy tất cả các đơn hàng
   const fetchAllOrders = async () => {
@@ -14,7 +16,9 @@ const Order = ({ token }) => {
     try {
       const response = await axios.post(backendUrl + '/api/order/list', {}, { headers: { token } });
       if (response.data.success) {
-        setOrders(response.data.orders);
+        // Sắp xếp các đơn hàng theo ngày (mới nhất đến cũ nhất)
+        const sortedOrders = response.data.orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setOrders(sortedOrders);
       } else {
         toast.error(response.data.message);
       }
@@ -40,6 +44,14 @@ const Order = ({ token }) => {
     fetchAllOrders();
   }, [token]);
 
+  // Tính toán đơn hàng trên trang hiện tại
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
+
+  // Chuyển sang trang tiếp theo hoặc trang trước
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   // Hàm hiển thị chi tiết đơn hàng
   const handleViewDetails = (order) => {
     setSelectedOrder(order);
@@ -50,7 +62,7 @@ const Order = ({ token }) => {
       <h3 className="text-3xl font-semibold text-indigo-600 mb-6">Danh sách Đơn Hàng</h3>
 
       <div className="space-y-6">
-        {orders.map((order, index) => (
+        {currentOrders.map((order, index) => (
           <div key={index} className="bg-white border rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-start gap-4 border-gray-200">
             
             {/* Hình ảnh biểu tượng đơn hàng */}
@@ -105,7 +117,26 @@ const Order = ({ token }) => {
         ))}
       </div>
 
-      {/* Modal hiển thị chi tiết đơn hàng 12:11:21 stripe/momo/sửa sản phẩm/ cập nhật tình trạng sp, thêm xóa sửa danh mục*/}
+      {/* Pagination */}
+      <div className="mt-6 flex justify-center">
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 disabled:opacity-50"
+        >
+          Trang trước
+        </button>
+        <span className="px-4 py-2 text-gray-700">Trang {currentPage}</span>
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage * ordersPerPage >= orders.length}
+          className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 disabled:opacity-50"
+        >
+          Trang sau
+        </button>
+      </div>
+
+      {/* Modal hiển thị chi tiết đơn hàng */}
       {selectedOrder && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">

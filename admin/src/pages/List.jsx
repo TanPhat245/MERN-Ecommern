@@ -4,11 +4,12 @@ import { backendUrl, currency } from "../App";
 import { toast } from "react-toastify";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const List = ({ token }) => {
   const [list, setList] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-
+  const navigate = useNavigate();  
   const fetchList = async () => {
     try {
       const response = await axios.get(backendUrl + "/api/product/list");
@@ -41,7 +42,6 @@ const List = ({ token }) => {
       toast.error(error.message);
     }
   };
-  
 
   const removeProduct = async (id) => {
     const result = await Swal.fire({
@@ -76,8 +76,8 @@ const List = ({ token }) => {
     }
   };
 
-  const editProduct = (id) => {
-    console.log("Edit product with ID:", id);
+  const handleEditClick = (id) => {
+    navigate(`/update/${id}`);
   };
 
   const handleViewDetails = (product) => {
@@ -102,8 +102,7 @@ const List = ({ token }) => {
           <b className="text-center">Tình trạng</b>
           <b className="text-center">Sửa</b>
           <b className="text-center">Xóa</b>
-          <b className="text-center">Xem Chi Tiết</b>{" "}
-          {/* Thêm cột Xem Chi Tiết */}
+          <b className="text-center">Xem Chi Tiết</b>
         </div>
 
         {list.map((item, index) => (
@@ -136,7 +135,7 @@ const List = ({ token }) => {
             </div>
             <div className="flex justify-center items-center">
               <button
-                onClick={() => editProduct(item._id)}
+                onClick={() => handleEditClick(item._id)}
                 className="text-blue-500 hover:text-blue-700 text-lg"
               >
                 <FaEdit />
@@ -150,7 +149,6 @@ const List = ({ token }) => {
                 <FaTrash />
               </button>
             </div>
-            {/* Nút Xem Chi Tiết */}
             <div className="flex justify-center items-center">
               <button
                 onClick={() => handleViewDetails(item)}
@@ -163,7 +161,6 @@ const List = ({ token }) => {
         ))}
       </div>
 
-      {/* Modal hiển thị chi tiết sản phẩm */}
       {selectedProduct && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-300">
           <div className="bg-white p-8 rounded-xl shadow-lg max-w-lg w-full transform scale-95 transition-transform duration-300 hover:scale-100">

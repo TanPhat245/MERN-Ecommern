@@ -30,10 +30,9 @@ const Dashboard = () => {
   const [totalProducts, setTotalProducts] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
 
-  // Fetch data for total statistics
   const fetchStatistics = async () => {
     try {
-      const response = await axios.get("/api/dashboard/stats"); // Replace with actual API endpoint
+      const response = await axios.get("/api/dashboard/stats"); 
       if (response.data.success) {
         setTotalUsers(response.data.stats.totalUsers);
         setTotalOrders(response.data.stats.totalOrders);

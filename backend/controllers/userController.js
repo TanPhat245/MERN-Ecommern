@@ -32,7 +32,7 @@ const loginUser = async (req,res) => {
 //dang ky
 const registerUser = async (req,res) => {
    try {
-        const {name, email, password} = req.body;
+        const {name, email, password, street,city, state, district, country, phone} = req.body;
         const exists = await userModel.findOne({email});
         if (exists) {
             return res.json({success:false, message:"Tài khoản hoặc email đã tồn tại"})
@@ -49,8 +49,14 @@ const registerUser = async (req,res) => {
         const newUser = new userModel({
             name,
             email,
-            password:hashPassword
-        })
+            password:hashPassword,
+            street,
+            city,
+            state,
+            district,
+            country,
+            phone,
+        });
 
         const user = await newUser.save()
         const token = createToken(user._id)
@@ -96,4 +102,6 @@ const getUserProfile = async (req, res) => {
       });
     }
   };
+
+//mua doi voi nguoi dung không đăng nhập
 export { loginUser, registerUser,adminLogin, getUserProfile }

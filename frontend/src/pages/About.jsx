@@ -6,69 +6,51 @@ import Newsletter from "../components/Newsletter";
 const About = () => {
   return (
     <div>
-    
-      <div className="text-2x; text-center pt-8 border-t">
+      <div className="text-2xl font-bold text-center pt-8 border-t border-gray-300">
         <Title text1={"VỀ"} text2={"CHÚNG TÔI"} />
       </div>
-      <div className="my-10 flex flex-col md:flex-row gap-16">
+      
+      <div className="my-10 flex flex-col md:flex-row gap-16 items-center">
         <img
-          className="w-full md:max-w-[450px]"
+          className="w-full md:max-w-[450px] rounded-lg shadow-lg"
           src={assets.about_img}
-          alt=""
+          alt="T1 Team Apparel"
         />
         <div className="flex flex-col justify-center gap-6 md:w-2/4 text-gray-600">
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum,
-            delectus! Tempore doloremque, quo tempora vitae omnis neque odio
-            quia non id, molestiae sit. A minus ab temporibus tempora alias
-            dolorum?
+            Tại T1, chúng tôi không chỉ bán quần áo – chúng tôi mang đến cho bạn cơ hội thể hiện niềm đam mê với đội tuyển T1 qua những bộ trang phục chính thức chất lượng cao. Mỗi chiếc áo đều được thiết kế với sự tỉ mỉ, mang đậm tinh thần chiến đấu của những người hâm mộ.
           </p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
-            magni in praesentium dolores distinctio repudiandae illum debitis
-            suscipit reprehenderit ullam minus iusto voluptatibus vel ab
-            accusantium temporibus, soluta, porro incidunt!
+            Sản phẩm của chúng tôi không chỉ đẹp mắt mà còn mang đến sự thoải mái tuyệt đối cho bạn. Hãy là một phần của đội tuyển T1, không chỉ trong lòng mà còn qua những bộ trang phục đầy phong cách.
           </p>
-          <b className="text-gray-800">Nhiệm vụ của tụi tao</b>
+          <b className="text-gray-800 text-lg">Tầm nhìn và sứ mệnh của chúng tôi</b>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-            alias quam non ratione eaque. Aut, ipsa ipsam. Eligendi consequuntur
-            quam quod accusamus! Incidunt at quae ipsum ut ipsa voluptatum
-            inventore?
+            Chúng tôi cam kết mang đến cho bạn những sản phẩm chất lượng cao, đáp ứng mọi nhu cầu của các fan hâm mộ. Từ chất liệu đến thiết kế, mỗi sản phẩm đều được chăm chút tỉ mỉ, mang lại trải nghiệm mua sắm tuyệt vời nhất cho khách hàng.
           </p>
         </div>
       </div>
 
-      <div className="text-xl py-4">
-        <Title text1={"TẠI SAO"} text2={"NÊN CHỌN TỤI TAO"} />
+      <div className="text-xl font-semibold py-4">
+        <Title text1={"TẠI SAO"} text2={"CHỌN CHÚNG TÔI?"} />
       </div>
 
-      <div className="flex flex-col md:flex-row text-sm mb-20">
-        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
-          <b>Siêu chất lượng</b>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 text-center">
+        <div className="border px-8 py-12 rounded-lg shadow-lg flex flex-col items-center gap-5">
+          <b className="text-xl text-blue-600">Siêu chất lượng</b>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
-            fugit quod. Totam, ea? Repellat corporis expedita nobis, cumque eius
-            omnis ex consequuntur quia, commodi animi voluptas. Numquam corporis
-            qui recusandae!
+            Các sản phẩm của chúng tôi được làm từ chất liệu cao cấp, đảm bảo sự bền bỉ và cảm giác thoải mái tối ưu. Dù bạn ở đâu, áo của T1 luôn theo bạn trong mọi cuộc hành trình.
           </p>
         </div>
-        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
-          <b>100% cotton</b>
+        <div className="border px-8 py-12 rounded-lg shadow-lg flex flex-col items-center gap-5">
+          <b className="text-xl text-blue-600">100% Cotton</b>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
-            fugit quod. Totam, ea? Repellat corporis expedita nobis, cumque eius
-            omnis ex consequuntur quia, commodi animi voluptas. Numquam corporis
-            qui recusandae!
+            Mỗi chiếc áo đều được làm từ 100% cotton tự nhiên, mang đến cảm giác mềm mại và dễ chịu cho người mặc. Bạn có thể tự tin vận động mà không lo bất kỳ sự khó chịu nào.
           </p>
         </div>
-        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
-          <b>Bo cổ dày dặn</b>
+        <div className="border px-8 py-12 rounded-lg shadow-lg flex flex-col items-center gap-5">
+          <b className="text-xl text-blue-600">Bo Cổ Dày Dặn</b>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
-            fugit quod. Totam, ea? Repellat corporis expedita nobis, cumque eius
-            omnis ex consequuntur quia, commodi animi voluptas. Numquam corporis
-            qui recusandae!
+            Với thiết kế bo cổ dày dặn, sản phẩm của T1 không chỉ đảm bảo độ bền cao mà còn tạo nên vẻ đẹp thể thao, mạnh mẽ, giúp bạn tự tin tỏa sáng ở mọi nơi.
           </p>
         </div>
       </div>

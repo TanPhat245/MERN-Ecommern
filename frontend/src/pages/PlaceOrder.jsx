@@ -5,6 +5,7 @@ import { assets } from '../assets/assets';
 import { ShopContext } from '../context/ShopContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 const PlaceOrder = () => {
   const [method, setMethod] = useState('cod');
@@ -20,10 +21,8 @@ const PlaceOrder = () => {
     country: '',
     phone: '',
   });
-
-  const [isDialogOpen, setIsDialogOpen] = useState(false); // Trạng thái của hộp thoại
-  const [isSubmitting, setIsSubmitting] = useState(false); // Trạng thái của nút "Xác nhận"
-
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const onChangeHandler = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -85,9 +84,42 @@ const PlaceOrder = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    setIsDialogOpen(true); // Mở hộp thoại xác nhận
+    setIsDialogOpen(true);
   };
 
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await axios.get(backenUrl + '/api/user/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }); if (response.data.success) {
+          const { name, email,street,city,state,district,country, phone } = response.data.user;
+          setFormData({
+            firstName: name.split(' ')[0],
+            lastName: name.split(' ').slice(1).join(' '),
+            email: email || '',
+            street: street || '',
+            city: city || '',
+            state: state || '',
+            district: district || '',
+            country: country || '',
+            phone: phone || '',
+          });
+        } else {
+          toast.error('Không thể lấy thông tin người dùng');
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error('Lỗi khi lấy thông tin người dùng');
+      }
+    };
+
+    if (token) {
+      fetchUserProfile();
+    }
+  }, [token]);
   return (
     <div>
       <form

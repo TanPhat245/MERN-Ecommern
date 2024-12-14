@@ -10,7 +10,7 @@ const productSchema = new mongoose.Schema({
     sizes: { type:Array, required:true },
     bestseller: {type:Boolean},
     date: { type:Number, required:true },
-    status: {type:String, required:true, default:'Còn hàng'}
+    status: {type:String, default:'Còn hàng'}
 })
 
 const productModel = mongoose.models.product || mongoose.model("product",productSchema);

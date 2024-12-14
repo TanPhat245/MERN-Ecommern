@@ -95,7 +95,7 @@ const Slidebar = () => {
         {/* Comments */}
         <NavLink
           className="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-gray-200 transition-all"
-          to="/comments"
+          to="/up"
         >
           <img className="w-5 h-5" src={assets.order_icon} alt="" />
           <span className="text-sm font-medium">Bình luận</span>
@@ -116,13 +116,13 @@ const Slidebar = () => {
             <div className="ml-8 mt-1">
               <NavLink
                 className="block py-2 px-4 rounded-lg hover:bg-gray-200 transition-all"
-                to="/add"
+                to="/up"
               >
                 Thêm nhân viên
               </NavLink>
               <NavLink
                 className="block py-2 px-4 rounded-lg hover:bg-gray-200 transition-all"
-                to="/list"
+                to="/up"
               >
                 Danh sách
               </NavLink>
