@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { assets } from '../assets/assets'
 import axios from 'axios'
 import { backendUrl } from '../App'
@@ -17,6 +17,26 @@ const Add = ({token}) => {
   const [subCategory, setSubCategory] = useState("aothun");
   const [bestseller, setBestseller] = useState(false);
   const [sizes, setSizes] = useState([]);
+
+  const [categorylist, setCategoryList] = useState([]);
+
+  const fetchList = async () => {
+    try {
+      const response = await axios.get(import.meta.env.VITE_BACKEND_URL + "/api/category/list");
+      if (response.data.success) {
+        setCategoryList(response.data.products);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchList();
+  }, []);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -96,9 +116,11 @@ const Add = ({token}) => {
         <div>
           <p className='mb-2'>Loại</p>
           <select onChange={(e) => setCategory(e.target.value)} className='w-full px-3 py-2'>
-            <option value="ao">Áo</option>
-            <option value="quan">Quần</option>
-            <option value="phukien">Phụ kiện</option>
+
+          {categorylist?.map((category) => (
+           <option value={category.name}>{category.name}</option>
+        ))}
+
           </select>
         </div>
 

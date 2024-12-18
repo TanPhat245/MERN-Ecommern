@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import axios from "axios";
 import { ShopContext } from '../context/ShopContext'
 import { assets } from '../assets/assets';
 import Title from '../components/Title';
@@ -12,7 +13,25 @@ const Collection = () => {
   const [category,setCategory] = useState([]);
   const [subCategory,setSubCategory] = useState([]);
   const [sortType,setSortType] = useState('relavent')
+  const [categorylist, setCategoryList] = useState([]);
 
+  const fetchList = async () => {
+    try {
+      const response = await axios.get(import.meta.env.VITE_BACKEND_URL + "/api/category/list");
+      if (response.data.success) {
+        setCategoryList(response.data.products);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchList();
+  }, []);
 
   const toggleCategory = (e) => {
     if (category.includes(e.target.value)) {
@@ -106,15 +125,14 @@ const Collection = () => {
         <div className={`border border-gray-300 pl-5 py-3 my-5 ${showFilter ? '' : 'hidden'} sm:block`}>
           <p className='mb-3 text-s font-medium'>Loại</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-            <p className='flex gap-2'>
-              <input className='w-3' type="checkbox"  value={'ao'} onChange={toggleSubCategory}/> Áo
-            </p>
-            <p className='flex gap-2'>
-              <input className='w-3' type="checkbox"  value={'quan'} onChange={toggleSubCategory}/> Quần
-            </p>
-            <p className='flex gap-2'>
-              <input className='w-3' type="checkbox"  value={'giay'} onChange={toggleSubCategory}/>  Giày
-            </p>
+
+
+          {categorylist?.map((category) => (
+              <div>
+                    <p className='flex gap-2'>
+                      <input className='w-3' type="checkbox"  value={category.name} onChange={toggleSubCategory}/>{category.name}</p>
+              </div>
+          ))}
           </div>
         </div>
       </div>

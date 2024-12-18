@@ -88,6 +88,11 @@ const List = ({ token }) => {
     fetchList();
   }, []);
 
+  useEffect(() => {
+    console.log("list: ", list);
+  }, [list]);
+
+
   return (
     <>
       <p className="mb-4 text-2xl font-semibold text-indigo-600">
@@ -105,7 +110,7 @@ const List = ({ token }) => {
           <b className="text-center">Xem Chi Tiết</b>
         </div>
 
-        {list.map((item, index) => (
+        {list?.map((item, index) => (
           <div
             className="grid grid-cols-[1fr_3fr_1fr_1fr_1fr_1fr_1fr] items-center gap-4 py-3 px-4 border-b bg-white rounded-lg shadow-sm transition hover:shadow-md"
             key={index}

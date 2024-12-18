@@ -13,6 +13,7 @@ const ShopContextProvider = (props) => {
   const [showSearch, setShowSearch] = useState(false);
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [token, setToken] = useState("");
 
   // Lấy dữ liệu từ localStorage để khởi tạo `cartItems`
@@ -95,7 +96,7 @@ const ShopContextProvider = (props) => {
     return totalAmount;
   };
 
-  // Hàm lấy danh sách sản phẩm từ API
+  //Hàm lấy danh sách sản phẩm từ API
   const getProductsData = async () => {
     try {
       const response = await axios.get(backenUrl + "/api/product/list");
@@ -109,11 +110,26 @@ const ShopContextProvider = (props) => {
       toast.error(error.message);
     }
   };
+
+  const getCategoriesData = async () => {
+    try {
+      const response = await axios.get(backenUrl + "/api/category/list");
+      if (response.data.success) {
+        setCategories(response.data.products);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+    }
+  };
   
 
   // Lấy dữ liệu sản phẩm khi ứng dụng khởi chạy
   useEffect(() => {
-    getProductsData();
+    getProductsData(); 
+    getCategoriesData();
   }, []);
 
   // Lấy token từ localStorage nếu có
@@ -125,6 +141,7 @@ const ShopContextProvider = (props) => {
 
   const value = {
     products,
+    categories,
     currency,
     delivery_fee,
     search,
